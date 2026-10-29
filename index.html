@@ -952,7 +952,7 @@
         day: "numeric", month: "long", year: "numeric"
       });
       const time = d.toLocaleTimeString("sl-SI", {
-        hour: "2-digit", minute: "2-digit"
+        hour: "2-digit", minute: "2-digit", second: "2-digit"
       });
       el.textContent = `\uD83D\uDCC5 Cene osve\u017Eene: ${date} ob ${time}`;
     }
