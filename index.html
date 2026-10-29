@@ -16,12 +16,12 @@
       --border: #E2E8F0;
       --border-hover: #CBD5E1;
 
-      --primary: #0F172A;          /* Globoka temačna modra */
-      --accent: #2563EB;           /* Živahna modra */
-      --green: #10B981;            /* Smaragdno zelena za prihranek */
+      --primary: #0F172A;
+      --accent: #2563EB;
+      --green: #10B981;
       --green-soft: #ECFDF5;
       --amber: #F59E0B;
-      --red: #EF4444;              /* Rdeča za drage avtocestne črpalke */
+      --red: #EF4444;
       --red-soft: #FEF2F2;
 
       --text-main: #0F172A;
@@ -55,7 +55,6 @@
       padding-bottom: 4rem;
     }
 
-    /* Glava */
     header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
@@ -120,13 +119,20 @@
       color: var(--accent);
     }
 
+    .sync-status {
+      display: block;
+      margin-top: 0.6rem;
+      font-size: 0.82rem;
+      color: var(--green);
+      font-weight: 700;
+    }
+
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 1.5rem;
     }
 
-    /* Izbirnik goriva */
     .fuel-selector-wrap {
       margin-top: 1.8rem;
     }
@@ -177,7 +183,6 @@
       opacity: 0.8;
     }
 
-    /* Kalkulator prihranka */
     .savings-banner {
       margin-top: 1.5rem;
       background: linear-gradient(135deg, #064E3B 0%, #065F46 100%);
@@ -203,9 +208,6 @@
       font-weight: 800;
       letter-spacing: -0.02em;
       margin-bottom: 0.3rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
     }
 
     .savings-info p {
@@ -241,7 +243,6 @@
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
 
-    /* Nadzorne kontrole (iskanje + sortiranje) */
     .controls-row {
       margin-top: 1.8rem;
       display: flex;
@@ -315,7 +316,6 @@
       border-color: var(--primary);
     }
 
-    /* Mreža kartic */
     .station-grid {
       margin-top: 1.5rem;
       display: grid;
@@ -335,7 +335,6 @@
       }
     }
 
-    /* Kartica črpalke */
     .station-card {
       background: var(--surface);
       border-radius: var(--radius-card);
@@ -430,7 +429,6 @@
       margin-top: 0.2rem;
     }
 
-    /* Glavni prikaz cene */
     .price-display-box {
       background: #F8FAFC;
       border: 1px solid var(--border);
@@ -485,7 +483,6 @@
     .diff-cheapest { color: #047857; }
     .diff-expensive { color: #B91C1C; }
 
-    /* Meta vrstica */
     .station-meta-row {
       display: flex;
       justify-content: space-between;
@@ -510,7 +507,6 @@
       border-radius: 50%;
     }
 
-    /* Gumbi */
     .card-actions {
       display: flex;
       gap: 0.6rem;
@@ -536,7 +532,6 @@
       background: var(--accent);
     }
 
-    /* Avtorsko vznožje */
     footer {
       max-width: 1200px;
       margin: 4rem auto 1rem;
@@ -575,6 +570,7 @@
         <div class="badge-pill" id="liveDate">📅 Nalagam datum...</div>
         <div class="badge-pill">Avtor &amp; skrbnik: <strong>Vladan Ikonić</strong></div>
       </div>
+      <div class="sync-status" id="syncStatus">● Povezano z bazo Goriva.si</div>
     </div>
   </header>
 
@@ -640,12 +636,12 @@
       Zasnoval in razvil: <strong>Vladan Ikonić</strong>
     </div>
     <p>© 2026 <strong>Cene goriv Goriška</strong> • Nova Gorica, Šempeter, Vrtojba, Solkan in Rožna Dolina</p>
-    <p style="font-size:0.8rem; margin-top:0.4rem; color:#94A3B8;">Cene goriv se osvežujejo v skladu z uradnimi objavami. Za točnost podatkov na prodajnem mestu odgovarja ponudnik.</p>
+    <p style="font-size:0.8rem; margin-top:0.4rem; color:#94A3B8;">Cene goriv se osvežujejo samodejno prek uradnega portala Goriva.si. Za točnost podatkov na prodajnem mestu odgovarja ponudnik.</p>
   </footer>
 
   <script>
-    // --- BAZA VSEH ČRPALK NA GORIŠKEM (RADiJ 10 KM) ---
-    const stationsData = [
+    // --- 1. PRIVZETA VGRAJENA BAZA (Takojšen prikaz, brez čakanja) ---
+    let stationsData = [
       {
         id: 1,
         brand: "FE-Trading (Hofer)",
@@ -655,12 +651,7 @@
         isHighway: false,
         hours: "00:00 - 24:00 (Avtomat)",
         mapsUrl: "https://maps.google.com/?q=FE+Trading+Hofer+Šempeter+pri+Gorici",
-        prices: {
-          dizel: 1.489,
-          95: 1.469,
-          100: null,
-          lpg: null
-        }
+        prices: { dizel: 1.489, 95: 1.469, 100: null, lpg: null }
       },
       {
         id: 2,
@@ -671,12 +662,7 @@
         isHighway: false,
         hours: "06:00 - 22:00",
         mapsUrl: "https://maps.google.com/?q=Petrol+Šempeter+pri+Gorici",
-        prices: {
-          dizel: 1.499,
-          95: 1.479,
-          100: 1.749,
-          lpg: 0.889
-        }
+        prices: { dizel: 1.499, 95: 1.479, 100: 1.749, lpg: 0.889 }
       },
       {
         id: 3,
@@ -687,12 +673,7 @@
         isHighway: false,
         hours: "06:00 - 22:00",
         mapsUrl: "https://maps.google.com/?q=Petrol+Ulica+Tolminskih+puntarjev+Nova+Gorica",
-        prices: {
-          dizel: 1.499,
-          95: 1.479,
-          100: 1.749,
-          lpg: 0.899
-        }
+        prices: { dizel: 1.499, 95: 1.479, 100: 1.749, lpg: 0.899 }
       },
       {
         id: 4,
@@ -703,12 +684,7 @@
         isHighway: false,
         hours: "06:00 - 22:00",
         mapsUrl: "https://maps.google.com/?q=Petrol+Vojkova+cesta+Nova+Gorica",
-        prices: {
-          dizel: 1.499,
-          95: 1.479,
-          100: 1.749,
-          lpg: null
-        }
+        prices: { dizel: 1.499, 95: 1.479, 100: 1.749, lpg: null }
       },
       {
         id: 5,
@@ -719,12 +695,7 @@
         isHighway: false,
         hours: "06:00 - 22:00",
         mapsUrl: "https://maps.google.com/?q=MOL+Prvomajska+Nova+Gorica",
-        prices: {
-          dizel: 1.499,
-          95: 1.479,
-          100: 1.739,
-          lpg: 0.879
-        }
+        prices: { dizel: 1.499, 95: 1.479, 100: 1.739, lpg: 0.879 }
       },
       {
         id: 6,
@@ -735,12 +706,7 @@
         isHighway: false,
         hours: "00:00 - 24:00 (Non-stop)",
         mapsUrl: "https://maps.google.com/?q=Petrol+Rožna+Dolina",
-        prices: {
-          dizel: 1.499,
-          95: 1.479,
-          100: 1.749,
-          lpg: 0.899
-        }
+        prices: { dizel: 1.499, 95: 1.479, 100: 1.749, lpg: 0.899 }
       },
       {
         id: 7,
@@ -751,12 +717,7 @@
         isHighway: false,
         hours: "06:00 - 21:00",
         mapsUrl: "https://maps.google.com/?q=Petrol+Solkan",
-        prices: {
-          dizel: 1.499,
-          95: 1.479,
-          100: null,
-          lpg: null
-        }
+        prices: { dizel: 1.499, 95: 1.479, 100: null, lpg: null }
       },
       {
         id: 8,
@@ -767,12 +728,7 @@
         isHighway: false,
         hours: "00:00 - 24:00 (Non-stop)",
         mapsUrl: "https://maps.google.com/?q=Petrol+Mednarodni+prehod+Vrtojba",
-        prices: {
-          dizel: 1.499,
-          95: 1.479,
-          100: 1.749,
-          lpg: 0.889
-        }
+        prices: { dizel: 1.499, 95: 1.479, 100: 1.749, lpg: 0.889 }
       },
       {
         id: 9,
@@ -780,15 +736,10 @@
         name: "MOL Vrtojba AC (Avtocesta H4)",
         address: "Avtocesta H4, Vrtojba (smer Italija)",
         distance: 6.1,
-        isHighway: true, // Avtocestna cena!
+        isHighway: true,
         hours: "00:00 - 24:00 (Non-stop)",
         mapsUrl: "https://maps.google.com/?q=MOL+Vrtojba+avtocesta",
-        prices: {
-          dizel: 1.769,
-          95: 1.749,
-          100: 1.949,
-          lpg: 0.999
-        }
+        prices: { dizel: 1.769, 95: 1.749, 100: 1.949, lpg: 0.999 }
       },
       {
         id: 10,
@@ -796,19 +747,13 @@
         name: "Petrol Vrtojba AC (Avtocesta H4)",
         address: "Avtocesta H4, Vrtojba (smer Razdrto)",
         distance: 6.3,
-        isHighway: true, // Avtocestna cena!
+        isHighway: true,
         hours: "00:00 - 24:00 (Non-stop)",
         mapsUrl: "https://maps.google.com/?q=Petrol+Vrtojba+avtocesta",
-        prices: {
-          dizel: 1.779,
-          95: 1.759,
-          100: 1.959,
-          lpg: 0.999
-        }
+        prices: { dizel: 1.779, 95: 1.759, 100: 1.959, lpg: 0.999 }
       }
     ];
 
-    // --- STANJE IN LOGIKA ---
     let currentFuel = "dizel";
     let tankSize = 50;
     let currentSort = "price";
@@ -844,16 +789,14 @@
       const grid = document.getElementById('stationsGrid');
       grid.innerHTML = "";
 
-      // Filtriraj tiste, ki ponujajo izbrano gorivo
-      let availableStations = stationsData.filter(s => s.prices[currentFuel] !== null);
+      let availableStations = stationsData.filter(s => s.prices && s.prices[currentFuel] !== null && s.prices[currentFuel] !== undefined);
 
-      // Iskalnik
       const q = searchQuery.toLowerCase().trim();
       if (q !== "") {
         availableStations = availableStations.filter(s => 
-          s.name.toLowerCase().includes(q) ||
-          s.brand.toLowerCase().includes(q) ||
-          s.address.toLowerCase().includes(q)
+          (s.name || "").toLowerCase().includes(q) ||
+          (s.brand || "").toLowerCase().includes(q) ||
+          (s.address || "").toLowerCase().includes(q)
         );
       }
 
@@ -862,14 +805,12 @@
         return;
       }
 
-      // Poišči najcenejšo in najdražjo ceno
       const pricesArr = availableStations.map(s => s.prices[currentFuel]);
       const minPrice = Math.min(...pricesArr);
       const maxPrice = Math.max(...pricesArr);
 
       updateSavingsBanner(minPrice, maxPrice);
 
-      // Razvrsti (po ceni ali po razdalji)
       availableStations.sort((a, b) => {
         if (currentSort === "price") {
           return a.prices[currentFuel] - b.prices[currentFuel];
@@ -905,7 +846,7 @@
           <div>
             <div class="station-header">
               <div class="brand-row">
-                <span class="station-brand">${station.brand}</span>
+                <span class="station-brand">${station.brand || ''}</span>
                 <span class="distance-tag">📍 ${station.distance} km</span>
               </div>
               <h2 class="station-name">${station.name}</h2>
@@ -940,7 +881,25 @@
       });
     }
 
-    // Poslušalci dogodkov (Zavihki goriva)
+    // --- 2. DINAMIČNO NALAGANJE CENE.JSON (Z uradnimi podatki) ---
+    async function loadLivePrices() {
+      try {
+        const res = await fetch('./cene.json?v=' + Date.now());
+        if (res.ok) {
+          const liveData = await res.json();
+          if (Array.isArray(liveData) && liveData.length > 0) {
+            stationsData = liveData;
+            const statusEl = document.getElementById('syncStatus');
+            if (statusEl) statusEl.textContent = "● Povezano z uradnimi cenami Goriva.si";
+            renderStations();
+          }
+        }
+      } catch (e) {
+        console.log("Uporabljam vgrajene cene:", e);
+      }
+    }
+
+    // Poslušalci dogodkov
     document.querySelectorAll('.fuel-tab').forEach(tab => {
       tab.addEventListener('click', (e) => {
         document.querySelectorAll('.fuel-tab').forEach(t => t.classList.remove('active'));
@@ -951,7 +910,6 @@
       });
     });
 
-    // Velikost rezervoarja
     document.querySelectorAll('.tank-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         document.querySelectorAll('.tank-btn').forEach(b => b.classList.remove('active'));
@@ -961,7 +919,6 @@
       });
     });
 
-    // Razvrščanje
     document.querySelectorAll('.sort-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
@@ -971,7 +928,6 @@
       });
     });
 
-    // Iskalnik
     document.getElementById('searchInput').addEventListener('input', (e) => {
       searchQuery = e.target.value;
       renderStations();
@@ -980,6 +936,7 @@
     // Zagon
     setDateBanner();
     renderStations();
+    loadLivePrices();
   </script>
 </body>
 </html>
