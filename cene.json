@@ -1,0 +1,364 @@
+{
+  "updated": "2026-10-29T21:43:06+00:00",
+  "source": "goriva.si (državni portal)",
+  "center": {
+    "name": "Nova Gorica",
+    "lat": 45.9580549,
+    "lng": 13.6474706
+  },
+  "radius_km": 10.0,
+  "stations": [
+    {
+      "id": 1947,
+      "brand": "Petrol",
+      "name": "Petrol Nova Gorica - Vojkova Vzhod",
+      "address": "Vojkova Cesta 51",
+      "distance": 0.5,
+      "isHighway": false,
+      "hours": "06:00-23:00",
+      "mapsUrl": "https://maps.google.com/?q=PETROL+NOVA+GORICA+-+VOJKOVA+VZHOD+VOJKOVA+CESTA+51,+Slovenija",
+      "prices": {
+        "dizel": 1.935,
+        "95": 1.627,
+        "100": 1.952,
+        "lpg": null
+      }
+    },
+    {
+      "id": 1984,
+      "brand": "Petrol",
+      "name": "Petrol Nova Gorica - Vojkova Zahod",
+      "address": "Vojkova Cesta 52",
+      "distance": 0.5,
+      "isHighway": false,
+      "hours": "Pon-Pet 07:00-20:00",
+      "mapsUrl": "https://maps.google.com/?q=PETROL+NOVA+GORICA+-+VOJKOVA+ZAHOD+VOJKOVA+CESTA+52,+Slovenija",
+      "prices": {
+        "dizel": 1.935,
+        "95": 1.627,
+        "100": 1.952,
+        "lpg": null
+      }
+    },
+    {
+      "id": 1981,
+      "brand": "Petrol",
+      "name": "Petrol Nova Gorica - Grčna",
+      "address": "Vojkova Cesta 68",
+      "distance": 0.7,
+      "isHighway": false,
+      "hours": "Pon-Pet 06:00-21:00 · drugače 07:00-21:00",
+      "mapsUrl": "https://maps.google.com/?q=PETROL+NOVA+GORICA+-+GRČNA+VOJKOVA+CESTA+68,+Slovenija",
+      "prices": {
+        "dizel": 1.935,
+        "95": 1.627,
+        "100": 1.952,
+        "lpg": null
+      }
+    },
+    {
+      "id": 1928,
+      "brand": "Petrol",
+      "name": "Petrol Solkan",
+      "address": "Cesta Ix. Korpusa 67",
+      "distance": 1.2,
+      "isHighway": false,
+      "hours": "Pon-Pet 07:00-20:00 · drugače 08:00-20:00",
+      "mapsUrl": "https://maps.google.com/?q=PETROL+SOLKAN+CESTA+IX.+KORPUSA+67,+Slovenija",
+      "prices": {
+        "dizel": 1.935,
+        "95": 1.627,
+        "100": 1.952,
+        "lpg": null
+      }
+    },
+    {
+      "id": 1952,
+      "brand": "Petrol",
+      "name": "Petrol Rožna Dolina",
+      "address": "Vipavska Cesta 3a",
+      "distance": 1.9,
+      "isHighway": false,
+      "hours": "00:00-23:59",
+      "mapsUrl": "https://maps.google.com/?q=PETROL+ROŽNA+DOLINA+VIPAVSKA+CESTA+3A,+Slovenija",
+      "prices": {
+        "dizel": 1.935,
+        "95": 1.627,
+        "100": 1.952,
+        "lpg": 1.016
+      }
+    },
+    {
+      "id": 849,
+      "brand": "MOL",
+      "name": "BS MOL Rožna Dolina Sever",
+      "address": "Angela Besednjaka 8",
+      "distance": 2.0,
+      "isHighway": false,
+      "hours": "Pon-Sob 06:00-22:00 · drugače 07:00-21:00",
+      "mapsUrl": "https://maps.google.com/?q=BS+MOL+ROŽNA+DOLINA+SEVER+Angela+Besednjaka+8,+Slovenija",
+      "prices": {
+        "dizel": 1.935,
+        "95": 1.627,
+        "100": 1.956,
+        "lpg": null
+      }
+    },
+    {
+      "id": 1560,
+      "brand": "MOL",
+      "name": "BS MOL Rožna Dolina",
+      "address": "Ulica Angela Besednjaka 8a",
+      "distance": 2.0,
+      "isHighway": false,
+      "hours": "00:00-23:59",
+      "mapsUrl": "https://maps.google.com/?q=BS+MOL+ROŽNA+DOLINA+ULICA+ANGELA+BESEDNJAKA+8A,+Slovenija",
+      "prices": {
+        "dizel": 1.935,
+        "95": 1.627,
+        "100": 1.956,
+        "lpg": 1.009
+      }
+    },
+    {
+      "id": 1959,
+      "brand": "Petrol",
+      "name": "Petrol Šempeter Pri Gorici - Prekomorskih Brigad",
+      "address": "Cesta Prekomorskih Brigad 64a",
+      "distance": 2.9,
+      "isHighway": false,
+      "hours": "Pon-Pet 07:00-20:00 · drugače 08:00-18:00",
+      "mapsUrl": "https://maps.google.com/?q=PETROL+ŠEMPETER+PRI+GORICI+-+PREKOMORSKIH+BRIGAD+CESTA+PREKOMORSKIH+BRIGAD+64A,+Slovenija",
+      "prices": {
+        "dizel": 1.935,
+        "95": 1.627,
+        "100": 1.952,
+        "lpg": null
+      }
+    },
+    {
+      "id": 1935,
+      "brand": "Petrol",
+      "name": "Petrol Šempeter Pri Gorici - Padlih Borcev",
+      "address": "Ulica Padlih Borcev 2",
+      "distance": 3.2,
+      "isHighway": false,
+      "hours": "Pon-Pet 07:00-20:00",
+      "mapsUrl": "https://maps.google.com/?q=PETROL+ŠEMPETER+PRI+GORICI+-+PADLIH+BORCEV+ULICA+PADLIH+BORCEV+2,+Slovenija",
+      "prices": {
+        "dizel": 1.935,
+        "95": 1.627,
+        "100": 1.952,
+        "lpg": null
+      }
+    },
+    {
+      "id": 2002,
+      "brand": "Petrol",
+      "name": "Petrol Ajševica",
+      "address": "Ajševica 19",
+      "distance": 3.4,
+      "isHighway": false,
+      "hours": "Pon-Pet 06:00-21:00 · drugače 08:00-20:00",
+      "mapsUrl": "https://maps.google.com/?q=PETROL+AJŠEVICA+AJŠEVICA+19,+Slovenija",
+      "prices": {
+        "dizel": 1.935,
+        "95": 1.627,
+        "100": 1.952,
+        "lpg": 1.016
+      }
+    },
+    {
+      "id": 2371,
+      "brand": "Shell",
+      "name": "SHELL Ajševica",
+      "address": "Loke 40",
+      "distance": 3.5,
+      "isHighway": false,
+      "hours": "Ni podatka",
+      "mapsUrl": "https://maps.google.com/?q=SHELL+AJŠEVICA+Loke+40,+Slovenija",
+      "prices": {
+        "dizel": 1.935,
+        "95": 1.627,
+        "100": 1.959,
+        "lpg": null
+      }
+    },
+    {
+      "id": 2261,
+      "brand": "Shell",
+      "name": "SHELL Vrtojba",
+      "address": "Ic Polje",
+      "distance": 4.2,
+      "isHighway": false,
+      "hours": "24 ur - črpalka brez osebja",
+      "mapsUrl": "https://maps.google.com/?q=SHELL+VRTOJBA+IC+POLJE,+Slovenija",
+      "prices": {
+        "dizel": 1.935,
+        "95": null,
+        "100": null,
+        "lpg": null
+      }
+    },
+    {
+      "id": 874,
+      "brand": "MOL",
+      "name": "BS MOL Vrtojba",
+      "address": "Polje 6",
+      "distance": 4.3,
+      "isHighway": false,
+      "hours": "06:00-22:00",
+      "mapsUrl": "https://maps.google.com/?q=BS+MOL+VRTOJBA+Polje+6,+Slovenija",
+      "prices": {
+        "dizel": 1.935,
+        "95": 1.627,
+        "100": 1.956,
+        "lpg": null
+      }
+    },
+    {
+      "id": 788,
+      "brand": "MOL",
+      "name": "BS MOL Truck Vrtojba",
+      "address": "Polje 10",
+      "distance": 4.3,
+      "isHighway": false,
+      "hours": "00:00-23:59",
+      "mapsUrl": "https://maps.google.com/?q=BS+MOL+TRUCK+VRTOJBA+Polje+10,+Slovenija",
+      "prices": {
+        "dizel": 1.935,
+        "95": null,
+        "100": null,
+        "lpg": null
+      }
+    },
+    {
+      "id": 2318,
+      "brand": "PRUNK",
+      "name": "Prunk Oil",
+      "address": "Mednarodni Prehod 1a",
+      "distance": 4.4,
+      "isHighway": false,
+      "hours": "00:00 - 24:00 (Non-stop)",
+      "mapsUrl": "https://maps.google.com/?q=PRUNK+OIL+Mednarodni+prehod+1a,+Slovenija",
+      "prices": {
+        "dizel": 1.923,
+        "95": null,
+        "100": null,
+        "lpg": null
+      }
+    },
+    {
+      "id": 1960,
+      "brand": "Petrol",
+      "name": "Petrol Miren",
+      "address": "Miren 13d",
+      "distance": 7.3,
+      "isHighway": false,
+      "hours": "Pon-Pet 07:00-21:00 · drugače 08:00-20:00",
+      "mapsUrl": "https://maps.google.com/?q=PETROL+MIREN+MIREN+13D,+Slovenija",
+      "prices": {
+        "dizel": 1.935,
+        "95": 1.627,
+        "100": 1.952,
+        "lpg": null
+      }
+    },
+    {
+      "id": 1985,
+      "brand": "Petrol",
+      "name": "Petrol Šempas",
+      "address": "Šempas 161a",
+      "distance": 7.8,
+      "isHighway": false,
+      "hours": "Pon-Pet 07:00-10:00,10:30-17:00,17:30-19:00 · drugače 08:00-10:00,10:30-17:00,17",
+      "mapsUrl": "https://maps.google.com/?q=PETROL+ŠEMPAS+ŠEMPAS+161A,+Slovenija",
+      "prices": {
+        "dizel": 1.935,
+        "95": 1.627,
+        "100": null,
+        "lpg": null
+      }
+    },
+    {
+      "id": 872,
+      "brand": "MOL",
+      "name": "BS MOL Vipolže",
+      "address": "Vipolže 6b",
+      "distance": 8.3,
+      "isHighway": false,
+      "hours": "Pon-Sob 06:00-21:00 · drugače 08:00-20:00",
+      "mapsUrl": "https://maps.google.com/?q=BS+MOL+VIPOLŽE+Vipolže+6b,+Slovenija",
+      "prices": {
+        "dizel": 1.935,
+        "95": 1.627,
+        "100": 1.956,
+        "lpg": null
+      }
+    },
+    {
+      "id": 1997,
+      "brand": "Petrol",
+      "name": "Petrol Vrtojba AC - Sever",
+      "address": "Mednarodni Prehod 1a",
+      "distance": 4.4,
+      "isHighway": true,
+      "hours": "00:00-23:59",
+      "mapsUrl": "https://maps.google.com/?q=PETROL+VRTOJBA+AC+-+SEVER+MEDNARODNI+PREHOD+1A,+Slovenija",
+      "prices": {
+        "dizel": 2.073,
+        "95": 1.794,
+        "100": 2.073,
+        "lpg": null
+      }
+    },
+    {
+      "id": 2000,
+      "brand": "Petrol",
+      "name": "Petrol Vrtojba AC - Jug",
+      "address": "Mednarodni Prehod 4a",
+      "distance": 4.6,
+      "isHighway": true,
+      "hours": "Pon-Pet 06:00-23:00 · drugače 08:00-21:00",
+      "mapsUrl": "https://maps.google.com/?q=PETROL+VRTOJBA+AC+-+JUG+MEDNARODNI+PREHOD+4A,+Slovenija",
+      "prices": {
+        "dizel": 2.073,
+        "95": 1.794,
+        "100": 2.073,
+        "lpg": 1.076
+      }
+    },
+    {
+      "id": 2008,
+      "brand": "Petrol",
+      "name": "Petrol Šempas AC - Jug",
+      "address": "Šempas 160c",
+      "distance": 7.2,
+      "isHighway": true,
+      "hours": "00:00-23:59",
+      "mapsUrl": "https://maps.google.com/?q=PETROL+ŠEMPAS+AC+-+JUG+ŠEMPAS+160C,+Slovenija",
+      "prices": {
+        "dizel": 2.073,
+        "95": 1.794,
+        "100": 2.073,
+        "lpg": null
+      }
+    },
+    {
+      "id": 861,
+      "brand": "MOL",
+      "name": "BS MOL Šempas",
+      "address": "Šempas 160b",
+      "distance": 7.3,
+      "isHighway": true,
+      "hours": "00:00-23:59",
+      "mapsUrl": "https://maps.google.com/?q=BS+MOL+ŠEMPAS+Šempas+160b,+Slovenija",
+      "prices": {
+        "dizel": 2.069,
+        "95": 1.794,
+        "100": 2.079,
+        "lpg": 1.069
+      }
+    }
+  ]
+}

@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cene goriv Goriška | Primerjalnik cen – Vladan Ikonić</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3063/3063177.png" type="image/png">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -80,12 +81,13 @@
     }
 
     header h1 {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       font-weight: 800;
-      color: var(--primary);
-      letter-spacing: -0.03em;
-      line-height: 1.15;
+      color: var(--green);
+      letter-spacing: -0.04em;
+      line-height: 1.1;
       margin-bottom: 0.5rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
     header p {
@@ -125,6 +127,18 @@
       font-size: 0.82rem;
       color: var(--green);
       font-weight: 700;
+    }
+
+    .clock {
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: #E2E8F0;
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-sm);
+      margin-top: 0.5rem;
+      display: inline-block;
     }
 
     .container {
@@ -570,7 +584,8 @@
         <div class="badge-pill" id="liveDate">📅 Nalagam datum...</div>
         <div class="badge-pill">Avtor &amp; skrbnik: <strong>Vladan Ikonić</strong></div>
       </div>
-      <div class="sync-status" id="syncStatus">● Povezano z bazo Goriva.si</div>
+      <div id="clock" class="clock">00:00:00</div>
+      <div class="sync-status" id="syncStatus" style="color: var(--text-muted);">● Nalagam cen...</div>
     </div>
   </header>
 
@@ -626,6 +641,15 @@
       </div>
     </div>
 
+    <!-- Filter po znamkah -->
+    <div class="controls-row brand-filter-row" style="margin-top: 1.5rem; justify-content: center; gap: 0.5rem;">
+      <button class="sort-btn brand-btn active" data-brand="all">Vse</button>
+      <button class="sort-btn brand-btn" data-brand="Petrol">Petrol</button>
+      <button class="sort-btn brand-btn" data-brand="MOL">MOL</button>
+      <button class="sort-btn brand-btn" data-brand="Shell">Shell</button>
+      <button class="sort-btn brand-btn" data-brand="Ostalo">Ostalo</button>
+    </div>
+
     <!-- Mreža črpalk -->
     <main class="station-grid" id="stationsGrid"></main>
 
@@ -641,148 +665,324 @@
 
   <script>
     // --- 1. PRIVZETA VGRAJENA BAZA (Takojšen prikaz, brez čakanja) ---
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('clock').textContent = now.toLocaleTimeString('sl-SI');
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
     let stationsData = [
       {
-        id: 1,
-        brand: "FE-Trading (Hofer)",
-        name: "FE-Trading Šempeter pri Gorici",
-        address: "Cesta Prekomorskih brigad 4, Šempeter",
-        distance: 3.8,
-        isHighway: false,
-        hours: "00:00 - 24:00 (Avtomat)",
-        mapsUrl: "https://maps.google.com/?q=FE+Trading+Hofer+Šempeter+pri+Gorici",
-        prices: { dizel: 1.489, 95: 1.469, 100: null, lpg: null }
-      },
-      {
-        id: 2,
+        id: 1947,
         brand: "Petrol",
-        name: "Petrol Šempeter pri Gorici",
-        address: "Vrtojbenska cesta 19, Šempeter",
-        distance: 4.1,
+        name: "Petrol Nova Gorica - Vojkova Vzhod",
+        address: "Vojkova Cesta 51",
+        distance: 0.5,
         isHighway: false,
-        hours: "06:00 - 22:00",
-        mapsUrl: "https://maps.google.com/?q=Petrol+Šempeter+pri+Gorici",
-        prices: { dizel: 1.499, 95: 1.479, 100: 1.749, lpg: 0.889 }
+        hours: "06:00-23:00",
+        mapsUrl: "https://maps.google.com/?q=PETROL+NOVA+GORICA+-+VOJKOVA+VZHOD+VOJKOVA+CESTA+51,+Slovenija",
+        prices: { dizel: 1.935, 95: 1.627, 100: 1.952, lpg: null }
       },
       {
-        id: 3,
+        id: 1984,
         brand: "Petrol",
-        name: "Petrol Nova Gorica - Tolminskih puntarjev",
-        address: "Ulica Tolminskih puntarjev 14, Nova Gorica",
-        distance: 0.6,
+        name: "Petrol Nova Gorica - Vojkova Zahod",
+        address: "Vojkova Cesta 52",
+        distance: 0.5,
         isHighway: false,
-        hours: "06:00 - 22:00",
-        mapsUrl: "https://maps.google.com/?q=Petrol+Ulica+Tolminskih+puntarjev+Nova+Gorica",
-        prices: { dizel: 1.499, 95: 1.479, 100: 1.749, lpg: 0.899 }
+        hours: "Pon-Pet 07:00-20:00",
+        mapsUrl: "https://maps.google.com/?q=PETROL+NOVA+GORICA+-+VOJKOVA+ZAHOD+VOJKOVA+CESTA+52,+Slovenija",
+        prices: { dizel: 1.935, 95: 1.627, 100: 1.952, lpg: null }
       },
       {
-        id: 4,
+        id: 1981,
         brand: "Petrol",
-        name: "Petrol Nova Gorica - Vojkova",
-        address: "Vojkova cesta 32, Nova Gorica",
-        distance: 1.2,
+        name: "Petrol Nova Gorica - Grčna",
+        address: "Vojkova Cesta 68",
+        distance: 0.7,
         isHighway: false,
-        hours: "06:00 - 22:00",
-        mapsUrl: "https://maps.google.com/?q=Petrol+Vojkova+cesta+Nova+Gorica",
-        prices: { dizel: 1.499, 95: 1.479, 100: 1.749, lpg: null }
+        hours: "Pon-Pet 06:00-21:00 · drugače 07:00-21:00",
+        mapsUrl: "https://maps.google.com/?q=PETROL+NOVA+GORICA+-+GRČNA+VOJKOVA+CESTA+68,+Slovenija",
+        prices: { dizel: 1.935, 95: 1.627, 100: 1.952, lpg: null }
       },
       {
-        id: 5,
-        brand: "MOL",
-        name: "MOL Nova Gorica - Prvomajska",
-        address: "Prvomajska ulica 48, Nova Gorica",
-        distance: 1.5,
-        isHighway: false,
-        hours: "06:00 - 22:00",
-        mapsUrl: "https://maps.google.com/?q=MOL+Prvomajska+Nova+Gorica",
-        prices: { dizel: 1.499, 95: 1.479, 100: 1.739, lpg: 0.879 }
-      },
-      {
-        id: 6,
-        brand: "Petrol",
-        name: "Petrol Rožna Dolina (Obmejni prehod)",
-        address: "Vipavska cesta 1, Rožna Dolina",
-        distance: 2.1,
-        isHighway: false,
-        hours: "00:00 - 24:00 (Non-stop)",
-        mapsUrl: "https://maps.google.com/?q=Petrol+Rožna+Dolina",
-        prices: { dizel: 1.499, 95: 1.479, 100: 1.749, lpg: 0.899 }
-      },
-      {
-        id: 7,
+        id: 1928,
         brand: "Petrol",
         name: "Petrol Solkan",
-        address: "Prvomajska ulica 112, Solkan",
-        distance: 2.4,
+        address: "Cesta Ix. Korpusa 67",
+        distance: 1.2,
         isHighway: false,
-        hours: "06:00 - 21:00",
-        mapsUrl: "https://maps.google.com/?q=Petrol+Solkan",
-        prices: { dizel: 1.499, 95: 1.479, 100: null, lpg: null }
+        hours: "Pon-Pet 07:00-20:00 · drugače 08:00-20:00",
+        mapsUrl: "https://maps.google.com/?q=PETROL+SOLKAN+CESTA+IX.+KORPUSA+67,+Slovenija",
+        prices: { dizel: 1.935, 95: 1.627, 100: 1.952, lpg: null }
       },
       {
-        id: 8,
+        id: 1952,
         brand: "Petrol",
-        name: "Petrol Vrtojba (Izven avtoceste / Meja)",
-        address: "Mednarodni prehod 2b, Vrtojba",
-        distance: 5.4,
+        name: "Petrol Rožna Dolina",
+        address: "Vipavska Cesta 3a",
+        distance: 1.9,
         isHighway: false,
-        hours: "00:00 - 24:00 (Non-stop)",
-        mapsUrl: "https://maps.google.com/?q=Petrol+Mednarodni+prehod+Vrtojba",
-        prices: { dizel: 1.499, 95: 1.479, 100: 1.749, lpg: 0.889 }
+        hours: "00:00-23:59",
+        mapsUrl: "https://maps.google.com/?q=PETROL+ROŽNA+DOLINA+VIPAVSKA+CESTA+3A,+Slovenija",
+        prices: { dizel: 1.935, 95: 1.627, 100: 1.952, lpg: 1.016 }
       },
       {
-        id: 9,
+        id: 849,
         brand: "MOL",
-        name: "MOL Vrtojba AC (Avtocesta H4)",
-        address: "Avtocesta H4, Vrtojba (smer Italija)",
-        distance: 6.1,
-        isHighway: true,
-        hours: "00:00 - 24:00 (Non-stop)",
-        mapsUrl: "https://maps.google.com/?q=MOL+Vrtojba+avtocesta",
-        prices: { dizel: 1.769, 95: 1.749, 100: 1.949, lpg: 0.999 }
+        name: "BS MOL Rožna Dolina Sever",
+        address: "Angela Besednjaka 8",
+        distance: 2.0,
+        isHighway: false,
+        hours: "Pon-Sob 06:00-22:00 · drugače 07:00-21:00",
+        mapsUrl: "https://maps.google.com/?q=BS+MOL+ROŽNA+DOLINA+SEVER+Angela+Besednjaka+8,+Slovenija",
+        prices: { dizel: 1.935, 95: 1.627, 100: 1.956, lpg: null }
       },
       {
-        id: 10,
+        id: 1560,
+        brand: "MOL",
+        name: "BS MOL Rožna Dolina",
+        address: "Ulica Angela Besednjaka 8a",
+        distance: 2.0,
+        isHighway: false,
+        hours: "00:00-23:59",
+        mapsUrl: "https://maps.google.com/?q=BS+MOL+ROŽNA+DOLINA+ULICA+ANGELA+BESEDNJAKA+8A,+Slovenija",
+        prices: { dizel: 1.935, 95: 1.627, 100: 1.956, lpg: 1.009 }
+      },
+      {
+        id: 1959,
         brand: "Petrol",
-        name: "Petrol Vrtojba AC (Avtocesta H4)",
-        address: "Avtocesta H4, Vrtojba (smer Razdrto)",
-        distance: 6.3,
-        isHighway: true,
+        name: "Petrol Šempeter Pri Gorici - Prekomorskih Brigad",
+        address: "Cesta Prekomorskih Brigad 64a",
+        distance: 2.9,
+        isHighway: false,
+        hours: "Pon-Pet 07:00-20:00 · drugače 08:00-18:00",
+        mapsUrl: "https://maps.google.com/?q=PETROL+ŠEMPETER+PRI+GORICI+-+PREKOMORSKIH+BRIGAD+CESTA+PREKOMORSKIH+BRIGAD+64A,+Slovenija",
+        prices: { dizel: 1.935, 95: 1.627, 100: 1.952, lpg: null }
+      },
+      {
+        id: 1935,
+        brand: "Petrol",
+        name: "Petrol Šempeter Pri Gorici - Padlih Borcev",
+        address: "Ulica Padlih Borcev 2",
+        distance: 3.2,
+        isHighway: false,
+        hours: "Pon-Pet 07:00-20:00",
+        mapsUrl: "https://maps.google.com/?q=PETROL+ŠEMPETER+PRI+GORICI+-+PADLIH+BORCEV+ULICA+PADLIH+BORCEV+2,+Slovenija",
+        prices: { dizel: 1.935, 95: 1.627, 100: 1.952, lpg: null }
+      },
+      {
+        id: 2002,
+        brand: "Petrol",
+        name: "Petrol Ajševica",
+        address: "Ajševica 19",
+        distance: 3.4,
+        isHighway: false,
+        hours: "Pon-Pet 06:00-21:00 · drugače 08:00-20:00",
+        mapsUrl: "https://maps.google.com/?q=PETROL+AJŠEVICA+AJŠEVICA+19,+Slovenija",
+        prices: { dizel: 1.935, 95: 1.627, 100: 1.952, lpg: 1.016 }
+      },
+      {
+        id: 2371,
+        brand: "Shell",
+        name: "SHELL Ajševica",
+        address: "Loke 40",
+        distance: 3.5,
+        isHighway: false,
+        hours: "Ni podatka",
+        mapsUrl: "https://maps.google.com/?q=SHELL+AJŠEVICA+Loke+40,+Slovenija",
+        prices: { dizel: 1.935, 95: 1.627, 100: 1.959, lpg: null }
+      },
+      {
+        id: 2261,
+        brand: "Shell",
+        name: "SHELL Vrtojba",
+        address: "Ic Polje",
+        distance: 4.2,
+        isHighway: false,
+        hours: "24 ur - črpalka brez osebja",
+        mapsUrl: "https://maps.google.com/?q=SHELL+VRTOJBA+IC+POLJE,+Slovenija",
+        prices: { dizel: 1.935, 95: null, 100: null, lpg: null }
+      },
+      {
+        id: 874,
+        brand: "MOL",
+        name: "BS MOL Vrtojba",
+        address: "Polje 6",
+        distance: 4.3,
+        isHighway: false,
+        hours: "06:00-22:00",
+        mapsUrl: "https://maps.google.com/?q=BS+MOL+VRTOJBA+Polje+6,+Slovenija",
+        prices: { dizel: 1.935, 95: 1.627, 100: 1.956, lpg: null }
+      },
+      {
+        id: 788,
+        brand: "MOL",
+        name: "BS MOL Truck Vrtojba",
+        address: "Polje 10",
+        distance: 4.3,
+        isHighway: false,
+        hours: "00:00-23:59",
+        mapsUrl: "https://maps.google.com/?q=BS+MOL+TRUCK+VRTOJBA+Polje+10,+Slovenija",
+        prices: { dizel: 1.935, 95: null, 100: null, lpg: null }
+      },
+      {
+        id: 2318,
+        brand: "PRUNK",
+        name: "Prunk Oil",
+        address: "Mednarodni Prehod 1a",
+        distance: 4.4,
+        isHighway: false,
         hours: "00:00 - 24:00 (Non-stop)",
-        mapsUrl: "https://maps.google.com/?q=Petrol+Vrtojba+avtocesta",
-        prices: { dizel: 1.779, 95: 1.759, 100: 1.959, lpg: 0.999 }
-      }
+        mapsUrl: "https://maps.google.com/?q=PRUNK+OIL+Mednarodni+prehod+1a,+Slovenija",
+        prices: { dizel: 1.923, 95: null, 100: null, lpg: null }
+      },
+      {
+        id: 1960,
+        brand: "Petrol",
+        name: "Petrol Miren",
+        address: "Miren 13d",
+        distance: 7.3,
+        isHighway: false,
+        hours: "Pon-Pet 07:00-21:00 · drugače 08:00-20:00",
+        mapsUrl: "https://maps.google.com/?q=PETROL+MIREN+MIREN+13D,+Slovenija",
+        prices: { dizel: 1.935, 95: 1.627, 100: 1.952, lpg: null }
+      },
+      {
+        id: 1985,
+        brand: "Petrol",
+        name: "Petrol Šempas",
+        address: "Šempas 161a",
+        distance: 7.8,
+        isHighway: false,
+        hours: "Pon-Pet 07:00-10:00,10:30-17:00,17:30-19:00 · drugače 08:00-10:00,10:30-17:00,17",
+        mapsUrl: "https://maps.google.com/?q=PETROL+ŠEMPAS+ŠEMPAS+161A,+Slovenija",
+        prices: { dizel: 1.935, 95: 1.627, 100: null, lpg: null }
+      },
+      {
+        id: 872,
+        brand: "MOL",
+        name: "BS MOL Vipolže",
+        address: "Vipolže 6b",
+        distance: 8.3,
+        isHighway: false,
+        hours: "Pon-Sob 06:00-21:00 · drugače 08:00-20:00",
+        mapsUrl: "https://maps.google.com/?q=BS+MOL+VIPOLŽE+Vipolže+6b,+Slovenija",
+        prices: { dizel: 1.935, 95: 1.627, 100: 1.956, lpg: null }
+      },
+      {
+        id: 1997,
+        brand: "Petrol",
+        name: "Petrol Vrtojba AC - Sever",
+        address: "Mednarodni Prehod 1a",
+        distance: 4.4,
+        isHighway: true,
+        hours: "00:00-23:59",
+        mapsUrl: "https://maps.google.com/?q=PETROL+VRTOJBA+AC+-+SEVER+MEDNARODNI+PREHOD+1A,+Slovenija",
+        prices: { dizel: 2.073, 95: 1.794, 100: 2.073, lpg: null }
+      },
+      {
+        id: 2000,
+        brand: "Petrol",
+        name: "Petrol Vrtojba AC - Jug",
+        address: "Mednarodni Prehod 4a",
+        distance: 4.6,
+        isHighway: true,
+        hours: "Pon-Pet 06:00-23:00 · drugače 08:00-21:00",
+        mapsUrl: "https://maps.google.com/?q=PETROL+VRTOJBA+AC+-+JUG+MEDNARODNI+PREHOD+4A,+Slovenija",
+        prices: { dizel: 2.073, 95: 1.794, 100: 2.073, lpg: 1.076 }
+      },
+      {
+        id: 2008,
+        brand: "Petrol",
+        name: "Petrol Šempas AC - Jug",
+        address: "Šempas 160c",
+        distance: 7.2,
+        isHighway: true,
+        hours: "00:00-23:59",
+        mapsUrl: "https://maps.google.com/?q=PETROL+ŠEMPAS+AC+-+JUG+ŠEMPAS+160C,+Slovenija",
+        prices: { dizel: 2.073, 95: 1.794, 100: 2.073, lpg: null }
+      },
+      {
+        id: 861,
+        brand: "MOL",
+        name: "BS MOL Šempas",
+        address: "Šempas 160b",
+        distance: 7.3,
+        isHighway: true,
+        hours: "00:00-23:59",
+        mapsUrl: "https://maps.google.com/?q=BS+MOL+ŠEMPAS+Šempas+160b,+Slovenija",
+        prices: { dizel: 2.069, 95: 1.794, 100: 2.079, lpg: 1.069 }
+      },
     ];
 
     let currentFuel = "dizel";
     let tankSize = 50;
     let currentSort = "price";
     let searchQuery = "";
+    let currentBrandFilter = "all";
+    let lastUpdated = null; // ISO čas zadnje osvežitve iz cene.json
 
-    function setDateBanner() {
-      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      const formatted = new Date().toLocaleDateString('sl-SI', options);
-      document.getElementById('liveDate').textContent = "📅 Danes: " + formatted.charAt(0).toUpperCase() + formatted.slice(1);
+    const FUEL_LABELS = {
+      dizel: "Dizel",
+      "95": "Bencin 95",
+      "100": "Bencin 100",
+      lpg: "Avtoplin"
+    };
+
+    function formatPrice(v) {
+      return v.toFixed(3).replace(".", ",") + " \u20AC";
     }
 
-    function updateSavingsBanner(minPrice, maxPrice) {
-      const fuelNames = {
-        dizel: "dizla",
-        95: "bencina 95",
-        100: "bencina 100",
-        lpg: "avtoplina (LPG)"
-      };
+    // Prikaz datuma osvežitve v glavi strani
+    function setDateBanner() {
+      const el = document.getElementById("liveDate");
+      if (!el) return;
+      if (!lastUpdated) {
+        el.textContent = "\uD83D\uDCC5 Vgrajene cene (osve\u017Eitev \u0161e ni bila)";
+        return;
+      }
+      const d = new Date(lastUpdated);
+      if (isNaN(d.getTime())) {
+        el.textContent = "\uD83D\uDCC5 Datum osve\u017Eitve ni na voljo";
+        return;
+      }
+      const date = d.toLocaleDateString("sl-SI", {
+        day: "numeric", month: "long", year: "numeric"
+      });
+      const time = d.toLocaleTimeString("sl-SI", {
+        hour: "2-digit", minute: "2-digit"
+      });
+      el.textContent = `\uD83D\uDCC5 Cene osve\u017Eene: ${date} ob ${time}`;
+    }
 
-      if (!minPrice || !maxPrice || minPrice === maxPrice) {
-        document.getElementById('savingsBanner').style.display = 'none';
+    // Pas s prihrankom glede na velikost rezervoarja
+    function updateSavingsBanner(minPrice, maxPrice) {
+      const titleEl = document.getElementById("savingsTitle");
+      const descEl = document.getElementById("savingsDesc");
+      if (!titleEl || !descEl) return;
+
+      const diffPerLiter = maxPrice - minPrice;
+      if (!isFinite(diffPerLiter) || diffPerLiter <= 0.0005) {
+        titleEl.textContent = "Vse \u010Drpalke imajo enako ceno";
+        descEl.textContent = "Pri izbranem gorivu ni cenovnih razlik v radiju 10 km.";
         return;
       }
 
-      document.getElementById('savingsBanner').style.display = 'flex';
-      const savings = (maxPrice - minPrice) * tankSize;
-      
-      document.getElementById('savingsTitle').innerHTML = `Prihranek: do ${savings.toFixed(2).replace('.', ',')} € na ${tankSize} L!`;
-      document.getElementById('savingsDesc').textContent = `Razlika med najcenejšo črpalko in avtocesto (Vrtojba) pri točenju ${fuelNames[currentFuel]}.`;
+      const saving = diffPerLiter * tankSize;
+      titleEl.textContent =
+        `Prihranek: do ${saving.toFixed(2).replace(".", ",")} \u20AC na ${tankSize} L rezervoar!`;
+      descEl.textContent =
+        `Razlika ${(diffPerLiter * 100).toFixed(1).replace(".", ",")} \u00E8/L med najcenej\u0161o in najdra\u017Ejo \u010Drpalko v radiju 10 km.`;
+    }
+
+    function filterByBrand(brand) {
+      currentBrandFilter = brand;
+      document.querySelectorAll('.brand-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.brand === brand);
+      });
+      renderStations();
     }
 
     function renderStations() {
@@ -790,6 +990,21 @@
       grid.innerHTML = "";
 
       let availableStations = stationsData.filter(s => s.prices && s.prices[currentFuel] !== null && s.prices[currentFuel] !== undefined);
+
+      // Filter po znamki
+      if (currentBrandFilter !== 'all') {
+        if (currentBrandFilter === 'Ostalo') {
+          // "Ostalo" = vse, kar ni Petrol, MOL ali Shell
+          availableStations = availableStations.filter(s => {
+            const b = (s.brand || '').toLowerCase();
+            return !b.includes('petrol') && !b.includes('mol') && !b.includes('shell');
+          });
+        } else {
+          availableStations = availableStations.filter(s =>
+            (s.brand || '').toLowerCase().includes(currentBrandFilter.toLowerCase())
+          );
+        }
+      }
 
       const q = searchQuery.toLowerCase().trim();
       if (q !== "") {
@@ -804,6 +1019,9 @@
         grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: #64748B;">Za izbrano gorivo ali iskalni niz ni zadetkov.</div>`;
         return;
       }
+
+      // Naslov pasu s prihrankom najprej pove, katero gorivo gledamo
+      const fuelLabel = FUEL_LABELS[currentFuel] || currentFuel;
 
       const pricesArr = availableStations.map(s => s.prices[currentFuel]);
       const minPrice = Math.min(...pricesArr);
@@ -838,7 +1056,8 @@
         if (isCheapest) {
           diffHtml = `<div class="price-diff diff-cheapest">Najnižja cena v radiju 10 km</div>`;
         } else {
-          diffHtml = `<div class="price-diff diff-expensive">+${(diff * 100).toFixed(1)} centov/L dražje</div>`;
+          const cents = (diff * 100).toFixed(1).replace(".", ",");
+          diffHtml = `<div class="price-diff diff-expensive">+${cents} centov/L dražje</div>`;
         }
 
         card.innerHTML = `
@@ -855,10 +1074,10 @@
 
             <div class="price-display-box">
               <div>
-                <span class="fuel-type-label">${currentFuel.toUpperCase()}</span>
+                <span class="fuel-type-label">${fuelLabel}</span>
                 ${diffHtml}
               </div>
-              <div class="price-number">${price.toFixed(3)} €</div>
+              <div class="price-number">${formatPrice(price)}</div>
             </div>
 
             <div class="station-meta-row">
@@ -883,19 +1102,40 @@
 
     // --- 2. DINAMIČNO NALAGANJE CENE.JSON (Z uradnimi podatki) ---
     async function loadLivePrices() {
+      const statusEl = document.getElementById('syncStatus');
       try {
-        const res = await fetch('./cene.json?v=' + Date.now());
-        if (res.ok) {
-          const liveData = await res.json();
-          if (Array.isArray(liveData) && liveData.length > 0) {
-            stationsData = liveData;
-            const statusEl = document.getElementById('syncStatus');
-            if (statusEl) statusEl.textContent = "● Povezano z uradnimi cenami Goriva.si";
-            renderStations();
-          }
+        const res = await fetch('./cene.json?v=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+
+        const liveData = await res.json();
+
+        // Nova oblika: { updated, stations: [...] }
+        // Stara oblika:  [ ... ]
+        let list = [];
+        if (Array.isArray(liveData)) {
+          list = liveData;
+        } else if (liveData && Array.isArray(liveData.stations)) {
+          list = liveData.stations;
+          lastUpdated = liveData.updated || null;
         }
+
+        if (list.length === 0) throw new Error('cene.json je prazen');
+
+        stationsData = list;
+        setDateBanner();
+
+        if (statusEl) {
+          statusEl.textContent = "● Povezano z uradnimi cenami Goriva.si";
+          statusEl.style.color = "var(--green)";
+        }
+        renderStations();
       } catch (e) {
         console.log("Uporabljam vgrajene cene:", e);
+        setDateBanner();
+        if (statusEl) {
+          statusEl.textContent = "● Ni povezave z bazo – prikazane so vgrajene cene";
+          statusEl.style.color = "var(--amber)";
+        }
       }
     }
 
@@ -919,12 +1159,18 @@
       });
     });
 
-    document.querySelectorAll('.sort-btn').forEach(btn => {
+    document.querySelectorAll('.sort-btn[data-sort]').forEach(btn => {
       btn.addEventListener('click', (e) => {
-        document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
-        currentSort = e.target.dataset.sort;
+        document.querySelectorAll('.sort-btn[data-sort]').forEach(b => b.classList.remove('active'));
+        e.currentTarget.classList.add('active');
+        currentSort = e.currentTarget.dataset.sort;
         renderStations();
+      });
+    });
+
+    document.querySelectorAll('.brand-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        filterByBrand(e.currentTarget.dataset.brand);
       });
     });
 
@@ -933,9 +1179,13 @@
       renderStations();
     });
 
-    // Zagon
+    // Zagon – najprej vgrajene cene, nato posodobitev iz cene.json
+    try {
+      renderStations();
+    } catch (err) {
+      console.error('Napaka pri prvem prikazu:', err);
+    }
     setDateBanner();
-    renderStations();
     loadLivePrices();
   </script>
 </body>
