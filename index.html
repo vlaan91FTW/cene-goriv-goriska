@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cene goriv Goriška | Primerjalnik cen – Vladan Ikonić</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #F4F6F9;
+      --surface: #FFFFFF;
+      --border: #E2E8F0;
+      --border-hover: #CBD5E1;
+
+      --primary: #0F172A;          /* Globoka temačna modra */
+      --accent: #2563EB;           /* Živahna modra */
+      --green: #10B981;            /* Smaragdno zelena za prihranek */
+      --green-soft: #ECFDF5;
+      --amber: #F59E0B;
+      --red: #EF4444;              /* Rdeča za drage avtocestne črpalke */
+      --red-soft: #FEF2F2;
+
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-card: 18px;
+      --radius-pill: 999px;
+
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04);
+      --shadow-card: 0 4px 16px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+      --shadow-hover: 0 16px 32px -4px rgba(15, 23, 42, 0.1), 0 6px 12px -2px rgba(15, 23, 42, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.04) 0px, transparent 40%),
+        radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.04) 0px, transparent 40%);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding-bottom: 4rem;
+    }
+
+    /* Glava */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 2.8rem 1.5rem 2rem;
+      text-align: center;
+    }
+
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .brand-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1.08rem;
+    }
+
+    .header-badges {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-top: 1.2rem;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #F1F5F9;
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      font-weight: 600;
+      padding: 0.4rem 1.1rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.88rem;
+    }
+
+    .badge-pill strong {
+      color: var(--accent);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Izbirnik goriva */
+    .fuel-selector-wrap {
+      margin-top: 1.8rem;
+    }
+
+    .fuel-selector {
+      display: flex;
+      gap: 0.5rem;
+      background: var(--surface);
+      padding: 0.5rem;
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      overflow-x: auto;
+    }
+
+    .fuel-tab {
+      flex: 1;
+      min-width: 130px;
+      background: transparent;
+      border: none;
+      padding: 0.85rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+      transition: all 0.2s ease;
+    }
+
+    .fuel-tab:hover {
+      background: #F8FAFC;
+      color: var(--text-main);
+    }
+
+    .fuel-tab.active {
+      background: var(--primary);
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+    }
+
+    .fuel-tab .fuel-sub {
+      font-size: 0.72rem;
+      font-weight: 500;
+      opacity: 0.8;
+    }
+
+    /* Kalkulator prihranka */
+    .savings-banner {
+      margin-top: 1.5rem;
+      background: linear-gradient(135deg, #064E3B 0%, #065F46 100%);
+      color: #FFFFFF;
+      border-radius: var(--radius-card);
+      padding: 1.5rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      box-shadow: 0 10px 25px -5px rgba(6, 78, 59, 0.2);
+    }
+
+    @media (min-width: 768px) {
+      .savings-banner {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    .savings-info h3 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .savings-info p {
+      font-size: 0.92rem;
+      opacity: 0.9;
+    }
+
+    .tank-control {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(255, 255, 255, 0.12);
+      padding: 0.4rem 0.6rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .tank-btn {
+      background: transparent;
+      border: none;
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .tank-btn.active {
+      background: #FFFFFF;
+      color: #064E3B;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Nadzorne kontrole (iskanje + sortiranje) */
+    .controls-row {
+      margin-top: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    @media (min-width: 680px) {
+      .controls-row {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    .search-box {
+      flex: 1;
+      max-width: 420px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: var(--radius-pill);
+      font-size: 0.92rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .search-box input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .sort-group {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .sort-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .sort-btn:hover {
+      border-color: var(--border-hover);
+      color: var(--text-main);
+    }
+
+    .sort-btn.active {
+      background: var(--primary);
+      color: #FFFFFF;
+      border-color: var(--primary);
+    }
+
+    /* Mreža kartic */
+    .station-grid {
+      margin-top: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.4rem;
+    }
+
+    @media (min-width: 720px) {
+      .station-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1100px) {
+      .station-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* Kartica črpalke */
+    .station-card {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-card);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .station-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--border-hover);
+    }
+
+    .station-card.is-cheapest {
+      border: 2px solid var(--green);
+    }
+
+    .station-card.is-highway {
+      border: 1.5px solid rgba(239, 68, 68, 0.35);
+      background: linear-gradient(180deg, #FFFFFF 0%, #FFFDFD 100%);
+    }
+
+    .card-top-badge {
+      position: absolute;
+      top: -12px;
+      left: 1.4rem;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-pill);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .badge-cheapest {
+      background: var(--green);
+      color: #FFFFFF;
+    }
+
+    .badge-highway {
+      background: var(--red);
+      color: #FFFFFF;
+    }
+
+    .station-header {
+      margin-top: 0.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .brand-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.3rem;
+    }
+
+    .station-brand {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
+
+    .distance-tag {
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: #F1F5F9;
+      padding: 0.2rem 0.55rem;
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+    }
+
+    .station-name {
+      font-size: 1.22rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+    }
+
+    .station-address {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* Glavni prikaz cene */
+    .price-display-box {
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .station-card.is-cheapest .price-display-box {
+      background: var(--green-soft);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .station-card.is-highway .price-display-box {
+      background: var(--red-soft);
+      border-color: rgba(239, 68, 68, 0.25);
+    }
+
+    .fuel-type-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .price-number {
+      font-size: 1.85rem;
+      font-weight: 900;
+      color: var(--primary);
+      letter-spacing: -0.03em;
+    }
+
+    .station-card.is-cheapest .price-number {
+      color: #065F46;
+    }
+
+    .station-card.is-highway .price-number {
+      color: #991B1B;
+    }
+
+    .price-diff {
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-top: -0.2rem;
+      text-align: right;
+    }
+
+    .diff-cheapest { color: #047857; }
+    .diff-expensive { color: #B91C1C; }
+
+    /* Meta vrstica */
+    .station-meta-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1rem;
+    }
+
+    .hours-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-weight: 600;
+    }
+
+    .dot-open {
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+    }
+
+    /* Gumbi */
+    .card-actions {
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .btn-nav {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      background: var(--primary);
+      color: #FFFFFF;
+      text-decoration: none;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+
+    .btn-nav:hover {
+      background: var(--accent);
+    }
+
+    /* Avtorsko vznožje */
+    footer {
+      max-width: 1200px;
+      margin: 4rem auto 1rem;
+      padding: 2.5rem 1.5rem 1rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    .footer-author-box {
+      display: inline-block;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1.3rem;
+      border-radius: var(--radius-pill);
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-author-box strong {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <span class="brand-eyebrow">⛽ Goriška &amp; Okolica (10 km)</span>
+      <h1>Cene goriv na črpalkah</h1>
+      <p>Hitra primerjava cen bencina, dizla in avtoplina. Prihranite z izbiro ugodnejše črpalke.</p>
+      
+      <div class="header-badges">
+        <div class="badge-pill" id="liveDate">📅 Nalagam datum...</div>
+        <div class="badge-pill">Avtor &amp; skrbnik: <strong>Vladan Ikonić</strong></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Izbira vrste goriva -->
+    <div class="fuel-selector-wrap">
+      <div class="fuel-selector">
+        <button class="fuel-tab active" data-fuel="dizel">
+          <span>⛽ Dizel</span>
+          <span class="fuel-sub">Dizelsko gorivo</span>
+        </button>
+        <button class="fuel-tab" data-fuel="95">
+          <span>🟢 Bencin 95</span>
+          <span class="fuel-sub">Neosvinčeni 95</span>
+        </button>
+        <button class="fuel-tab" data-fuel="100">
+          <span>🔵 Bencin 100</span>
+          <span class="fuel-sub">Premium 100</span>
+        </button>
+        <button class="fuel-tab" data-fuel="lpg">
+          <span>🟡 Avtoplin</span>
+          <span class="fuel-sub">LPG</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Pas s prihrankom -->
+    <div class="savings-banner" id="savingsBanner">
+      <div class="savings-info">
+        <h3 id="savingsTitle">Prihranek: do 14,50 € na rezervoar!</h3>
+        <p id="savingsDesc">Če natočite v Šempetru ali Novi Gorici namesto na avtocesti v Vrtojbi.</p>
+      </div>
+      <div class="tank-control">
+        <span style="font-size:0.75rem; font-weight:700; opacity:0.8; margin-left:0.4rem;">REZERVOAR:</span>
+        <button class="tank-btn" data-liters="40">40 L</button>
+        <button class="tank-btn active" data-liters="50">50 L</button>
+        <button class="tank-btn" data-liters="60">60 L</button>
+        <button class="tank-btn" data-liters="70">70 L</button>
+      </div>
+    </div>
+
+    <!-- Iskalnik in sortiranje -->
+    <div class="controls-row">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Išči petrol, mol, šempeter, vrtojba..." />
+      </div>
+
+      <div class="sort-group">
+        <button class="sort-btn active" data-sort="price">🏆 Najcenejše</button>
+        <button class="sort-btn" data-sort="distance">📍 Najbližje</button>
+      </div>
+    </div>
+
+    <!-- Mreža črpalk -->
+    <main class="station-grid" id="stationsGrid"></main>
+
+  </div>
+
+  <footer>
+    <div class="footer-author-box">
+      Zasnoval in razvil: <strong>Vladan Ikonić</strong>
+    </div>
+    <p>© 2026 <strong>Cene goriv Goriška</strong> • Nova Gorica, Šempeter, Vrtojba, Solkan in Rožna Dolina</p>
+    <p style="font-size:0.8rem; margin-top:0.4rem; color:#94A3B8;">Cene goriv se osvežujejo v skladu z uradnimi objavami. Za točnost podatkov na prodajnem mestu odgovarja ponudnik.</p>
+  </footer>
+
+  <script>
+    // --- BAZA VSEH ČRPALK NA GORIŠKEM (RADiJ 10 KM) ---
+    const stationsData = [
+      {
+        id: 1,
+        brand: "FE-Trading (Hofer)",
+        name: "FE-Trading Šempeter pri Gorici",
+        address: "Cesta Prekomorskih brigad 4, Šempeter",
+        distance: 3.8,
+        isHighway: false,
+        hours: "00:00 - 24:00 (Avtomat)",
+        mapsUrl: "https://maps.google.com/?q=FE+Trading+Hofer+Šempeter+pri+Gorici",
+        prices: {
+          dizel: 1.489,
+          95: 1.469,
+          100: null,
+          lpg: null
+        }
+      },
+      {
+        id: 2,
+        brand: "Petrol",
+        name: "Petrol Šempeter pri Gorici",
+        address: "Vrtojbenska cesta 19, Šempeter",
+        distance: 4.1,
+        isHighway: false,
+        hours: "06:00 - 22:00",
+        mapsUrl: "https://maps.google.com/?q=Petrol+Šempeter+pri+Gorici",
+        prices: {
+          dizel: 1.499,
+          95: 1.479,
+          100: 1.749,
+          lpg: 0.889
+        }
+      },
+      {
+        id: 3,
+        brand: "Petrol",
+        name: "Petrol Nova Gorica - Tolminskih puntarjev",
+        address: "Ulica Tolminskih puntarjev 14, Nova Gorica",
+        distance: 0.6,
+        isHighway: false,
+        hours: "06:00 - 22:00",
+        mapsUrl: "https://maps.google.com/?q=Petrol+Ulica+Tolminskih+puntarjev+Nova+Gorica",
+        prices: {
+          dizel: 1.499,
+          95: 1.479,
+          100: 1.749,
+          lpg: 0.899
+        }
+      },
+      {
+        id: 4,
+        brand: "Petrol",
+        name: "Petrol Nova Gorica - Vojkova",
+        address: "Vojkova cesta 32, Nova Gorica",
+        distance: 1.2,
+        isHighway: false,
+        hours: "06:00 - 22:00",
+        mapsUrl: "https://maps.google.com/?q=Petrol+Vojkova+cesta+Nova+Gorica",
+        prices: {
+          dizel: 1.499,
+          95: 1.479,
+          100: 1.749,
+          lpg: null
+        }
+      },
+      {
+        id: 5,
+        brand: "MOL",
+        name: "MOL Nova Gorica - Prvomajska",
+        address: "Prvomajska ulica 48, Nova Gorica",
+        distance: 1.5,
+        isHighway: false,
+        hours: "06:00 - 22:00",
+        mapsUrl: "https://maps.google.com/?q=MOL+Prvomajska+Nova+Gorica",
+        prices: {
+          dizel: 1.499,
+          95: 1.479,
+          100: 1.739,
+          lpg: 0.879
+        }
+      },
+      {
+        id: 6,
+        brand: "Petrol",
+        name: "Petrol Rožna Dolina (Obmejni prehod)",
+        address: "Vipavska cesta 1, Rožna Dolina",
+        distance: 2.1,
+        isHighway: false,
+        hours: "00:00 - 24:00 (Non-stop)",
+        mapsUrl: "https://maps.google.com/?q=Petrol+Rožna+Dolina",
+        prices: {
+          dizel: 1.499,
+          95: 1.479,
+          100: 1.749,
+          lpg: 0.899
+        }
+      },
+      {
+        id: 7,
+        brand: "Petrol",
+        name: "Petrol Solkan",
+        address: "Prvomajska ulica 112, Solkan",
+        distance: 2.4,
+        isHighway: false,
+        hours: "06:00 - 21:00",
+        mapsUrl: "https://maps.google.com/?q=Petrol+Solkan",
+        prices: {
+          dizel: 1.499,
+          95: 1.479,
+          100: null,
+          lpg: null
+        }
+      },
+      {
+        id: 8,
+        brand: "Petrol",
+        name: "Petrol Vrtojba (Izven avtoceste / Meja)",
+        address: "Mednarodni prehod 2b, Vrtojba",
+        distance: 5.4,
+        isHighway: false,
+        hours: "00:00 - 24:00 (Non-stop)",
+        mapsUrl: "https://maps.google.com/?q=Petrol+Mednarodni+prehod+Vrtojba",
+        prices: {
+          dizel: 1.499,
+          95: 1.479,
+          100: 1.749,
+          lpg: 0.889
+        }
+      },
+      {
+        id: 9,
+        brand: "MOL",
+        name: "MOL Vrtojba AC (Avtocesta H4)",
+        address: "Avtocesta H4, Vrtojba (smer Italija)",
+        distance: 6.1,
+        isHighway: true, // Avtocestna cena!
+        hours: "00:00 - 24:00 (Non-stop)",
+        mapsUrl: "https://maps.google.com/?q=MOL+Vrtojba+avtocesta",
+        prices: {
+          dizel: 1.769,
+          95: 1.749,
+          100: 1.949,
+          lpg: 0.999
+        }
+      },
+      {
+        id: 10,
+        brand: "Petrol",
+        name: "Petrol Vrtojba AC (Avtocesta H4)",
+        address: "Avtocesta H4, Vrtojba (smer Razdrto)",
+        distance: 6.3,
+        isHighway: true, // Avtocestna cena!
+        hours: "00:00 - 24:00 (Non-stop)",
+        mapsUrl: "https://maps.google.com/?q=Petrol+Vrtojba+avtocesta",
+        prices: {
+          dizel: 1.779,
+          95: 1.759,
+          100: 1.959,
+          lpg: 0.999
+        }
+      }
+    ];
+
+    // --- STANJE IN LOGIKA ---
+    let currentFuel = "dizel";
+    let tankSize = 50;
+    let currentSort = "price";
+    let searchQuery = "";
+
+    function setDateBanner() {
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const formatted = new Date().toLocaleDateString('sl-SI', options);
+      document.getElementById('liveDate').textContent = "📅 Danes: " + formatted.charAt(0).toUpperCase() + formatted.slice(1);
+    }
+
+    function updateSavingsBanner(minPrice, maxPrice) {
+      const fuelNames = {
+        dizel: "dizla",
+        95: "bencina 95",
+        100: "bencina 100",
+        lpg: "avtoplina (LPG)"
+      };
+
+      if (!minPrice || !maxPrice || minPrice === maxPrice) {
+        document.getElementById('savingsBanner').style.display = 'none';
+        return;
+      }
+
+      document.getElementById('savingsBanner').style.display = 'flex';
+      const savings = (maxPrice - minPrice) * tankSize;
+      
+      document.getElementById('savingsTitle').innerHTML = `Prihranek: do ${savings.toFixed(2).replace('.', ',')} € na ${tankSize} L!`;
+      document.getElementById('savingsDesc').textContent = `Razlika med najcenejšo črpalko in avtocesto (Vrtojba) pri točenju ${fuelNames[currentFuel]}.`;
+    }
+
+    function renderStations() {
+      const grid = document.getElementById('stationsGrid');
+      grid.innerHTML = "";
+
+      // Filtriraj tiste, ki ponujajo izbrano gorivo
+      let availableStations = stationsData.filter(s => s.prices[currentFuel] !== null);
+
+      // Iskalnik
+      const q = searchQuery.toLowerCase().trim();
+      if (q !== "") {
+        availableStations = availableStations.filter(s => 
+          s.name.toLowerCase().includes(q) ||
+          s.brand.toLowerCase().includes(q) ||
+          s.address.toLowerCase().includes(q)
+        );
+      }
+
+      if (availableStations.length === 0) {
+        grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: #64748B;">Za izbrano gorivo ali iskalni niz ni zadetkov.</div>`;
+        return;
+      }
+
+      // Poišči najcenejšo in najdražjo ceno
+      const pricesArr = availableStations.map(s => s.prices[currentFuel]);
+      const minPrice = Math.min(...pricesArr);
+      const maxPrice = Math.max(...pricesArr);
+
+      updateSavingsBanner(minPrice, maxPrice);
+
+      // Razvrsti (po ceni ali po razdalji)
+      availableStations.sort((a, b) => {
+        if (currentSort === "price") {
+          return a.prices[currentFuel] - b.prices[currentFuel];
+        } else {
+          return a.distance - b.distance;
+        }
+      });
+
+      availableStations.forEach(station => {
+        const price = station.prices[currentFuel];
+        const isCheapest = price === minPrice;
+        const diff = price - minPrice;
+
+        const card = document.createElement('article');
+        card.className = `station-card ${isCheapest ? 'is-cheapest' : ''} ${station.isHighway ? 'is-highway' : ''}`;
+
+        let badgeHtml = "";
+        if (isCheapest) {
+          badgeHtml = `<div class="card-top-badge badge-cheapest">🏆 Najugodnejša izbira</div>`;
+        } else if (station.isHighway) {
+          badgeHtml = `<div class="card-top-badge badge-highway">⚠️ Avtocestna cena (dražje)</div>`;
+        }
+
+        let diffHtml = "";
+        if (isCheapest) {
+          diffHtml = `<div class="price-diff diff-cheapest">Najnižja cena v radiju 10 km</div>`;
+        } else {
+          diffHtml = `<div class="price-diff diff-expensive">+${(diff * 100).toFixed(1)} centov/L dražje</div>`;
+        }
+
+        card.innerHTML = `
+          ${badgeHtml}
+          <div>
+            <div class="station-header">
+              <div class="brand-row">
+                <span class="station-brand">${station.brand}</span>
+                <span class="distance-tag">📍 ${station.distance} km</span>
+              </div>
+              <h2 class="station-name">${station.name}</h2>
+              <p class="station-address">${station.address}</p>
+            </div>
+
+            <div class="price-display-box">
+              <div>
+                <span class="fuel-type-label">${currentFuel.toUpperCase()}</span>
+                ${diffHtml}
+              </div>
+              <div class="price-number">${price.toFixed(3)} €</div>
+            </div>
+
+            <div class="station-meta-row">
+              <span class="hours-indicator">
+                <span class="dot-open"></span>
+                <span>${station.hours}</span>
+              </span>
+              <span>${station.isHighway ? 'Avtocesta H4' : 'Lokalna cesta'}</span>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <a href="${station.mapsUrl}" target="_blank" rel="noopener noreferrer" class="btn-nav">
+              Pelji me tja 🚗
+            </a>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    // Poslušalci dogodkov (Zavihki goriva)
+    document.querySelectorAll('.fuel-tab').forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        document.querySelectorAll('.fuel-tab').forEach(t => t.classList.remove('active'));
+        const btn = e.currentTarget;
+        btn.classList.add('active');
+        currentFuel = btn.dataset.fuel;
+        renderStations();
+      });
+    });
+
+    // Velikost rezervoarja
+    document.querySelectorAll('.tank-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.tank-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        tankSize = parseInt(e.target.dataset.liters);
+        renderStations();
+      });
+    });
+
+    // Razvrščanje
+    document.querySelectorAll('.sort-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        currentSort = e.target.dataset.sort;
+        renderStations();
+      });
+    });
+
+    // Iskalnik
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      renderStations();
+    });
+
+    // Zagon
+    setDateBanner();
+    renderStations();
+  </script>
+</body>
+</html>
