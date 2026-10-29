@@ -1,0 +1,39 @@
+name: Posodobitev cen goriv
+
+on:
+  schedule:
+    # Vsak dan ob 05:00 UTC (06:00 zjutraj po slovenskem času)
+    - cron: '0 5 * * *'
+    # Vsak torek ob 00:05 UTC (ko se v Sloveniji zamenjajo regulirane cene)
+    - cron: '5 23 * * 1'
+  workflow_dispatch: # Možnost ročnega zagona kadarkoli
+
+permissions:
+  contents: write
+
+jobs:
+  update-fuel-prices:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prenos repozitorija
+        uses: actions/checkout@v4
+
+      - name: Namestitev Pythona
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Namestitev knjižnice requests
+        run: pip install requests
+
+      - name: Zagon skripte za cene goriv
+        run: python fetch_prices.py
+
+      - name: Shrani cene.json
+        run: |
+          git config --global user.name "Cene Goriv Bot"
+          git config --global user.email "bot@goriva.local"
+          git add cene.json
+          git commit -m "Samodejna osvežitev cen goriv [skip ci]" || exit 0
+          git pull --rebase origin main
+          git push
