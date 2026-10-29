@@ -948,13 +948,23 @@
         el.textContent = "\uD83D\uDCC5 Datum osve\u017Eitve ni na voljo";
         return;
       }
-      const date = d.toLocaleDateString("sl-SI", {
-        day: "numeric", month: "long", year: "numeric"
+      // "četrtek, 29. oktober 2026" -> "Četrtek, 29. oktober 2026"
+      const formatted = d.toLocaleDateString("sl-SI", {
+        weekday: "long", day: "numeric", month: "long", year: "numeric"
       });
-      const time = d.toLocaleTimeString("sl-SI", {
-        hour: "2-digit", minute: "2-digit", second: "2-digit"
-      });
-      el.textContent = `\uD83D\uDCC5 Cene osve\u017Eene: ${date} ob ${time}`;
+      const dateLabel = formatted.charAt(0).toUpperCase() + formatted.slice(1);
+
+      // Besedo "Danes" dodamo samo, če so cene res iz današnjega dneva.
+      // Če je prenos zastarel (npr. ni bilo povezave), datum prikažemo brez "Danes".
+      const now = new Date();
+      const isToday =
+        d.getFullYear() === now.getFullYear() &&
+        d.getMonth() === now.getMonth() &&
+        d.getDate() === now.getDate();
+
+      el.textContent = isToday
+        ? `\uD83D\uDCC5 Danes: ${dateLabel}`
+        : `\uD83D\uDCC5 ${dateLabel}`;
     }
 
     // Pas s prihrankom glede na velikost rezervoarja
