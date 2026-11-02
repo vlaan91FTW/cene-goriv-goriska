@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-01T11:35:49+00:00",
+  "updated": "2026-11-02T12:58:39+00:00",
   "source": "goriva.si (državni portal)",
   "center": {
     "name": "Nova Gorica",
@@ -325,7 +325,7 @@
         "dizel": 2.133,
         "95": 1.854,
         "100": 2.143,
-        "lpg": 1.086
+        "lpg": 1.076
       }
     },
     {
