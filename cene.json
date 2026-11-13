@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-12T13:27:59+00:00",
+  "updated": "2026-11-13T12:43:46+00:00",
   "source": "goriva.si (državni portal)",
   "center": {
     "name": "Nova Gorica",
@@ -306,9 +306,9 @@
       "hours": "00:00-23:59",
       "mapsUrl": "https://maps.google.com/?q=PETROL+VRTOJBA+AC+-+SEVER+MEDNARODNI+PREHOD+1A,+Slovenija",
       "prices": {
-        "dizel": 2.036,
-        "95": 1.723,
-        "100": 2.011,
+        "dizel": 2.056,
+        "95": 1.743,
+        "100": 2.031,
         "lpg": null
       }
     },
@@ -322,10 +322,10 @@
       "hours": "Pon-Pet 06:00-23:00 · drugače 08:00-21:00",
       "mapsUrl": "https://maps.google.com/?q=PETROL+VRTOJBA+AC+-+JUG+MEDNARODNI+PREHOD+4A,+Slovenija",
       "prices": {
-        "dizel": 2.036,
-        "95": 1.723,
-        "100": 2.011,
-        "lpg": 1.198
+        "dizel": 2.046,
+        "95": 1.733,
+        "100": 2.031,
+        "lpg": 1.208
       }
     },
     {
@@ -338,9 +338,9 @@
       "hours": "00:00-23:59",
       "mapsUrl": "https://maps.google.com/?q=PETROL+ŠEMPAS+AC+-+JUG+ŠEMPAS+160C,+Slovenija",
       "prices": {
-        "dizel": 2.036,
-        "95": 1.723,
-        "100": 2.011,
+        "dizel": 2.046,
+        "95": 1.733,
+        "100": 2.031,
         "lpg": null
       }
     },
@@ -354,9 +354,9 @@
       "hours": "00:00-23:59",
       "mapsUrl": "https://maps.google.com/?q=BS+MOL+ŠEMPAS+Šempas+160b,+Slovenija",
       "prices": {
-        "dizel": 1.984,
-        "95": 1.674,
-        "100": 1.969,
+        "dizel": 2.034,
+        "95": 1.724,
+        "100": 2.039,
         "lpg": 1.196
       }
     }
