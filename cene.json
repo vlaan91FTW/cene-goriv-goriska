@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-23T15:32:33+00:00",
+  "updated": "2026-11-24T06:55:33+00:00",
   "source": "goriva.si (državni portal)",
   "center": {
     "name": "Nova Gorica",
@@ -18,9 +18,9 @@
       "hours": "06:00-23:00",
       "mapsUrl": "https://maps.google.com/?q=PETROL+NOVA+GORICA+-+VOJKOVA+VZHOD+VOJKOVA+CESTA+51,+Slovenija",
       "prices": {
-        "dizel": 1.798,
-        "95": 1.444,
-        "100": 1.782,
+        "dizel": 1.738,
+        "95": 1.413,
+        "100": 1.756,
         "lpg": null
       }
     },
@@ -34,9 +34,9 @@
       "hours": "Pon-Pet 07:00-20:00",
       "mapsUrl": "https://maps.google.com/?q=PETROL+NOVA+GORICA+-+VOJKOVA+ZAHOD+VOJKOVA+CESTA+52,+Slovenija",
       "prices": {
-        "dizel": 1.798,
-        "95": 1.444,
-        "100": 1.782,
+        "dizel": 1.738,
+        "95": 1.413,
+        "100": 1.756,
         "lpg": null
       }
     },
@@ -50,9 +50,9 @@
       "hours": "Pon-Pet 06:00-21:00 · drugače 07:00-21:00",
       "mapsUrl": "https://maps.google.com/?q=PETROL+NOVA+GORICA+-+GRČNA+VOJKOVA+CESTA+68,+Slovenija",
       "prices": {
-        "dizel": 1.798,
-        "95": 1.444,
-        "100": 1.782,
+        "dizel": 1.738,
+        "95": 1.413,
+        "100": 1.756,
         "lpg": null
       }
     },
@@ -66,9 +66,9 @@
       "hours": "Pon-Pet 07:00-20:00 · drugače 08:00-20:00",
       "mapsUrl": "https://maps.google.com/?q=PETROL+SOLKAN+CESTA+IX.+KORPUSA+67,+Slovenija",
       "prices": {
-        "dizel": 1.798,
-        "95": 1.444,
-        "100": 1.782,
+        "dizel": 1.738,
+        "95": 1.413,
+        "100": 1.756,
         "lpg": null
       }
     },
@@ -82,9 +82,9 @@
       "hours": "00:00-23:59",
       "mapsUrl": "https://maps.google.com/?q=PETROL+ROŽNA+DOLINA+VIPAVSKA+CESTA+3A,+Slovenija",
       "prices": {
-        "dizel": 1.798,
-        "95": 1.444,
-        "100": 1.782,
+        "dizel": 1.738,
+        "95": 1.413,
+        "100": 1.756,
         "lpg": 1.153
       }
     },
@@ -98,9 +98,9 @@
       "hours": "Pon-Sob 06:00-22:00 · drugače 07:00-21:00",
       "mapsUrl": "https://maps.google.com/?q=BS+MOL+ROŽNA+DOLINA+SEVER+Angela+Besednjaka+8,+Slovenija",
       "prices": {
-        "dizel": 1.798,
-        "95": 1.444,
-        "100": 1.779,
+        "dizel": 1.738,
+        "95": 1.413,
+        "100": 1.754,
         "lpg": null
       }
     },
@@ -114,9 +114,9 @@
       "hours": "00:00-23:59",
       "mapsUrl": "https://maps.google.com/?q=BS+MOL+ROŽNA+DOLINA+ULICA+ANGELA+BESEDNJAKA+8A,+Slovenija",
       "prices": {
-        "dizel": 1.798,
-        "95": 1.444,
-        "100": 1.779,
+        "dizel": 1.738,
+        "95": 1.413,
+        "100": 1.754,
         "lpg": 1.149
       }
     },
@@ -130,9 +130,9 @@
       "hours": "Pon-Pet 07:00-20:00 · drugače 08:00-18:00",
       "mapsUrl": "https://maps.google.com/?q=PETROL+ŠEMPETER+PRI+GORICI+-+PREKOMORSKIH+BRIGAD+CESTA+PREKOMORSKIH+BRIGAD+64A,+Slovenija",
       "prices": {
-        "dizel": 1.798,
-        "95": 1.444,
-        "100": 1.782,
+        "dizel": 1.738,
+        "95": 1.413,
+        "100": 1.756,
         "lpg": null
       }
     },
@@ -146,9 +146,9 @@
       "hours": "Pon-Pet 07:00-20:00",
       "mapsUrl": "https://maps.google.com/?q=PETROL+ŠEMPETER+PRI+GORICI+-+PADLIH+BORCEV+ULICA+PADLIH+BORCEV+2,+Slovenija",
       "prices": {
-        "dizel": 1.798,
-        "95": 1.444,
-        "100": 1.782,
+        "dizel": 1.738,
+        "95": 1.413,
+        "100": 1.756,
         "lpg": null
       }
     },
@@ -162,9 +162,9 @@
       "hours": "Pon-Pet 06:00-21:00 · drugače 08:00-20:00",
       "mapsUrl": "https://maps.google.com/?q=PETROL+AJŠEVICA+AJŠEVICA+19,+Slovenija",
       "prices": {
-        "dizel": 1.798,
-        "95": 1.444,
-        "100": 1.782,
+        "dizel": 1.738,
+        "95": 1.413,
+        "100": 1.756,
         "lpg": 1.153
       }
     },
@@ -178,9 +178,9 @@
       "hours": "Ni podatka",
       "mapsUrl": "https://maps.google.com/?q=SHELL+AJŠEVICA+Loke+40,+Slovenija",
       "prices": {
-        "dizel": 1.798,
-        "95": 1.444,
-        "100": 1.799,
+        "dizel": 1.738,
+        "95": 1.413,
+        "100": 1.769,
         "lpg": null
       }
     },
@@ -194,7 +194,7 @@
       "hours": "24 ur - črpalka brez osebja",
       "mapsUrl": "https://maps.google.com/?q=SHELL+VRTOJBA+IC+POLJE,+Slovenija",
       "prices": {
-        "dizel": 1.798,
+        "dizel": 1.738,
         "95": null,
         "100": null,
         "lpg": null
@@ -210,9 +210,9 @@
       "hours": "06:00-22:00",
       "mapsUrl": "https://maps.google.com/?q=BS+MOL+VRTOJBA+Polje+6,+Slovenija",
       "prices": {
-        "dizel": 1.798,
-        "95": 1.444,
-        "100": 1.779,
+        "dizel": 1.738,
+        "95": 1.413,
+        "100": 1.754,
         "lpg": null
       }
     },
@@ -226,7 +226,7 @@
       "hours": "00:00-23:59",
       "mapsUrl": "https://maps.google.com/?q=BS+MOL+TRUCK+VRTOJBA+Polje+10,+Slovenija",
       "prices": {
-        "dizel": 1.798,
+        "dizel": 1.738,
         "95": null,
         "100": null,
         "lpg": null
@@ -242,7 +242,7 @@
       "hours": "00:00 - 24:00 (Non-stop)",
       "mapsUrl": "https://maps.google.com/?q=PRUNK+OIL+Mednarodni+prehod+1a,+Slovenija",
       "prices": {
-        "dizel": 1.798,
+        "dizel": 1.738,
         "95": null,
         "100": null,
         "lpg": null
@@ -258,9 +258,9 @@
       "hours": "Pon-Pet 07:00-21:00 · drugače 08:00-20:00",
       "mapsUrl": "https://maps.google.com/?q=PETROL+MIREN+MIREN+13D,+Slovenija",
       "prices": {
-        "dizel": 1.798,
-        "95": 1.444,
-        "100": 1.782,
+        "dizel": 1.738,
+        "95": 1.413,
+        "100": 1.756,
         "lpg": null
       }
     },
@@ -274,8 +274,8 @@
       "hours": "Pon-Pet 07:00-10:00,10:30-17:00,17:30-19:00 · drugače 08:00-10:00,10:30-17:00,17",
       "mapsUrl": "https://maps.google.com/?q=PETROL+ŠEMPAS+ŠEMPAS+161A,+Slovenija",
       "prices": {
-        "dizel": 1.798,
-        "95": 1.444,
+        "dizel": 1.738,
+        "95": 1.413,
         "100": null,
         "lpg": null
       }
@@ -290,9 +290,9 @@
       "hours": "Pon-Sob 06:00-21:00 · drugače 08:00-20:00",
       "mapsUrl": "https://maps.google.com/?q=BS+MOL+VIPOLŽE+Vipolže+6b,+Slovenija",
       "prices": {
-        "dizel": 1.798,
-        "95": 1.444,
-        "100": 1.779,
+        "dizel": 1.738,
+        "95": 1.413,
+        "100": 1.754,
         "lpg": null
       }
     },
@@ -306,9 +306,9 @@
       "hours": "00:00-23:59",
       "mapsUrl": "https://maps.google.com/?q=PETROL+VRTOJBA+AC+-+SEVER+MEDNARODNI+PREHOD+1A,+Slovenija",
       "prices": {
-        "dizel": 2.006,
-        "95": 1.681,
-        "100": 1.973,
+        "dizel": 1.876,
+        "95": 1.58,
+        "100": 1.877,
         "lpg": null
       }
     },
@@ -322,9 +322,9 @@
       "hours": "Pon-Pet 06:00-23:00 · drugače 08:00-21:00",
       "mapsUrl": "https://maps.google.com/?q=PETROL+VRTOJBA+AC+-+JUG+MEDNARODNI+PREHOD+4A,+Slovenija",
       "prices": {
-        "dizel": 1.996,
-        "95": 1.671,
-        "100": 1.973,
+        "dizel": 1.876,
+        "95": 1.58,
+        "100": 1.877,
         "lpg": 1.198
       }
     },
@@ -338,9 +338,9 @@
       "hours": "00:00-23:59",
       "mapsUrl": "https://maps.google.com/?q=PETROL+ŠEMPAS+AC+-+JUG+ŠEMPAS+160C,+Slovenija",
       "prices": {
-        "dizel": 1.996,
-        "95": 1.671,
-        "100": 1.973,
+        "dizel": 1.876,
+        "95": 1.58,
+        "100": 1.877,
         "lpg": null
       }
     },
@@ -354,9 +354,9 @@
       "hours": "00:00-23:59",
       "mapsUrl": "https://maps.google.com/?q=BS+MOL+ŠEMPAS+Šempas+160b,+Slovenija",
       "prices": {
-        "dizel": 1.984,
-        "95": 1.664,
-        "100": 1.969,
+        "dizel": 1.874,
+        "95": 1.579,
+        "100": 1.874,
         "lpg": 1.196
       }
     }
